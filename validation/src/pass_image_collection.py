@@ -429,13 +429,7 @@ glad_labels = glad_labels.map(lambda img: img.set('system:time_start', ee.Date(e
 
 window_labels = ee.ImageCollection('projects/wlfw-um/assets/mexico/ag_mv_win')
 
-cdl = ee.ImageCollection("USDA/NASS/CDL")
-
-# Apply the remapping function to each image in the CDL collection.
-cdl_labels = cdl.map(remap_croplands).map(lambda x: x.rename(['cultivated']).clip(true_roi))
-
-
-# Usable space model
+# Receive the true ROI for CDL model, to compare apples to apples 
 
 useable_space = ee.ImageCollection('projects/wlfw-um/assets/mexico/useable_space_tack')
 
@@ -460,3 +454,11 @@ combinedBoundaries = vectors.geometry().dissolve(100)
 
 # Store the combinedBoundaries in an Earth Engine geometry object called true_roi
 true_roi = combinedBoundaries
+
+cdl = ee.ImageCollection("USDA/NASS/CDL")
+
+# Apply the remapping function to each image in the CDL collection.
+cdl_labels = cdl.map(remap_croplands).map(lambda x: x.rename(['cultivated']).clip(true_roi))
+
+
+

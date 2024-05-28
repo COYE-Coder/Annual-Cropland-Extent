@@ -1,4 +1,4 @@
-# Agriculture Validation Pipeline
+# Crop-Scpe Validation Pipeline
 
 This directory contains the code and resources for the agriculture validation protocol used to assess the accuracy of our Crop Watch product.
 

@@ -1,6 +1,6 @@
 # Crop-Scope Validation Pipeline
 
-This directory contains the code and resources for the agriculture validation protocol used to assess the accuracy of our Crop Watch product.
+This directory contains the code and resources for the agriculture validation protocol used to assess the accuracy of our Crop Scope data product.
 
 ## Overview
 

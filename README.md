@@ -38,3 +38,15 @@ Our map highlights the long-term trajectory of the central North American cropla
 ## Visualization
 
 For a visualization of the dataset, please refer to this [Google Earth Engine Link](https://historical-imagery.projects.earthengine.app/view/mxag)
+
+## Citations
+
+<font size="2" color="#808080">
+
+Jones, M. O., Robinson, N. P., Naugle, D. E., Maestas, J. D., Reeves, M. C., Lankston, R. W., & Allred, B. W. (2020). Annual and 16-day rangeland production estimates for the western United States. bioRxiv, 2020.11.06.343038. http://dx.doi.org/10.1101/2020.11.06.343038
+
+Potapov, P., Turubanova, S., Hansen, M. C., Tyukavina, A., Zalles, V., Khan, A., Song, X.-P., Pickens, A., Shen, Q., & Cortez, J. (2021). Global maps of cropland extent and change show accelerated cropland expansion in the 21st century. Nature Food.
+
+USDA-NASS. (2021). USDA National Agricultural Statistics Service Cropland Data Layer. Published crop-specific data layer [Online]. Available at https://nassgeodata.gmu.edu/CropScape/ (accessed April 20, 2023). USDA-NASS, Washington, DC.
+
+</font>

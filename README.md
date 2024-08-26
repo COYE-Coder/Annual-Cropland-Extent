@@ -7,7 +7,7 @@ Agricultural land use conversion represents the largest transformation of Earth'
 Using a convolutional neural network architecture (Attention U-Net), we estimate the change in the cumulative agricultural footprint over the North American central grasslands annually from 1996 to 2021. This region spans:
 
 - The Great Plains of Canada
-- The United States
+- The Great Plains of the United States
 - Most of the Southern Semi-Arid Highlands and North American Deserts ecoregions of Mexico
 
 Our study area encompasses the entire central North American flyway, which is crucial for the migration and wintering habitat of imperiled grassland birds.

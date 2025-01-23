@@ -16,12 +16,12 @@ The methodology was applied independently to two subregions (Great Plains and So
 
 ```bash
 pip install git+https://github.com/yourusername/bias_correction.git
-
+```
 
 
 ## Usage
 
-import bias_correction as bc
+```import bias_correction as bc
 
 # Process both total and active footprints
 results = bc.process_footprint(
@@ -37,7 +37,7 @@ results = bc.process_footprint(
 )
 
 # Create visualization
-bc.create_multipanel_plot(results, save_path='trends.png')
+bc.create_multipanel_plot(results, save_path='trends.png')```
 
 
 See `demo.ipynb` for a complete example.

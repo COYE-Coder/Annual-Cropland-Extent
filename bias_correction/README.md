@@ -29,16 +29,20 @@ The methodology was applied independently to two subregions (Great Plains and So
   }
 }}%%
 
-flowchart TB
-    subgraph InputData[" 📊 INPUT DATA                                                                                          "]
-        direction LR
-        style InputData fill:#e6f3ff,stroke:#7AA7C7,stroke-width:4px
-        
-        TotalArea["Total Cropland<br/><i>Annual area estimates<br/>by region</i>"] ---
-        ActiveArea["Active Cropland<br/><i>Annual area estimates<br/>by region</i>"] ---
-        ValidationData["Validation Samples<br/><i>Visual interpretation<br/>of cropland presence</i>"] ---
-        StrataProp["Strata Information<br/><i>Regional sampling<br/>proportions</i>"]
-    end
+subgraph InputData[" 📊 INPUT DATA "]
+    direction LR
+    style InputData fill:#e6f3ff,stroke:#7AA7C7,stroke-width:4px
+    
+    TotalArea["Total Cropland<br/><i>Annual area estimates<br/>by region</i>"]
+    ActiveArea["Active Cropland<br/><i>Annual area estimates<br/>by region</i>"]
+    ValidationData["Validation Samples<br/><i>Visual interpretation<br/>of cropland presence</i>"]
+    StrataProp["Strata Information<br/><i>Regional sampling<br/>proportions</i>"]
+    
+    %% Use simple lines to connect boxes horizontally
+    TotalArea --- ActiveArea
+    ActiveArea --- ValidationData
+    ValidationData --- StrataProp
+end
 
     subgraph Process[" ⚙️ SPLIT SUBREGIONS"]
         direction TB

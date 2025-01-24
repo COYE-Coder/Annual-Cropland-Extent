@@ -12,6 +12,80 @@ The package implements a stratified sampling approach for bias correction of cro
 
 The methodology was applied independently to two subregions (Great Plains and Southern) and then combined to generate final area estimates and associated uncertainties for the entire study area.
 
+
+## Workflow Diagram 
+
+'''mermaid 
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#b3e0ff',
+    'primaryTextColor': '#000',
+    'primaryBorderColor': '#7AA7C7',
+    'lineColor': '#7AA7C7',
+    'secondaryColor': '#ffe0b3',
+    'tertiaryColor': '#fff',
+    'fontSize': '20px'
+  }
+}}%%
+
+flowchart TB
+    subgraph InputData[" 📊 INPUT DATA                                                                                          "]
+        direction LR
+        style InputData fill:#e6f3ff,stroke:#7AA7C7,stroke-width:4px
+        
+        TotalArea["Total Cropland<br/><i>Annual area estimates<br/>by region</i>"] ---
+        ActiveArea["Active Cropland<br/><i>Annual area estimates<br/>by region</i>"] ---
+        ValidationData["Validation Samples<br/><i>Visual interpretation<br/>of cropland presence</i>"] ---
+        StrataProp["Strata Information<br/><i>Regional sampling<br/>proportions</i>"]
+    end
+
+    subgraph Process[" ⚙️ SPLIT SUBREGIONS"]
+        direction TB
+        style Process fill:#fff5e6,stroke:#D4A76A,stroke-width:15px
+        
+        Split["Split Data by Region"]
+        
+        subgraph RegionalAnalysis["Regional Analysis"]
+            direction LR
+            
+            subgraph GreatPlains["Great Plains Analysis"]
+                direction TB
+                style GreatPlains fill:#fffbf0,stroke:#D4A76A,stroke-width:2px
+                
+                GP_Comm["Commission/Omission<br/>Error Rates"] & GP_SE["Standard Error<br/>Calculation"] --> GP_Calc["Calculate Area<br/>Adjustments"]
+            end
+            
+            subgraph Mexico["Mexico Analysis"]
+                direction TB
+                style Mexico fill:#fffbf0,stroke:#D4A76A,stroke-width:2px
+                
+                MX_Comm["Commission/Omission<br/>Error Rates"] & MX_SE["Standard Error<br/>Calculation"] --> MX_Calc["Calculate Area<br/>Adjustments"]
+            end
+        end
+
+        Split --> GreatPlains
+        Split --> Mexico
+    end
+
+    subgraph Results["📈 RESULTS"]
+        direction TB
+        style Results fill:#e6ffe6,stroke:#79B779,stroke-width:4px
+        
+        Combine["Combine Regional<br/>Results"]
+        Uncertainty["Propagate<br/>Uncertainty"]
+        Final["Generate Final<br/>Estimates"]
+        
+        Combine --> Uncertainty --> Final
+    end
+
+    InputData --> Split
+    GP_Calc & MX_Calc --> Combine
+
+    classDef default fontSize:16px;
+    classDef process fill:#f9f9f9,stroke:#666,stroke-width:2px,fontSize:18px;
+    classDef box fill:#fff,stroke:#333,stroke-width:2px,fontSize:18px;
+    ```mermaid
 ## Installation
 
 ```bash

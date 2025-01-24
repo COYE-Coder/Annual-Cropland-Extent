@@ -40,9 +40,9 @@ flowchart TB
         StrataProp["Strata Information<br/><i>Regional sampling<br/>proportions</i>"]
         
         %% Create connection lines without arrows
-        TotalArea --o ActiveArea
-        ActiveArea --o ValidationData
-        ValidationData --o StrataProp
+        TotalArea o-o ActiveArea
+        ActiveArea o-o ValidationData
+        ValidationData o-o StrataProp
     end
 
 

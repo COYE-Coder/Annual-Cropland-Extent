@@ -39,10 +39,9 @@ flowchart TB
         ValidationData["Validation Samples<br/><i>Visual interpretation<br/>of cropland presence</i>"]
         StrataProp["Strata Information<br/><i>Regional sampling<br/>proportions</i>"]
         
-        %% Create connection lines without arrows
-        TotalArea ooo ActiveArea
-        ActiveArea ooo ValidationData
-        ValidationData ooo StrataProp
+        %% Link them in a single line
+        linkStyle default stroke:#7AA7C7,stroke-width:2px
+        TotalArea ~~~ ActiveArea ~~~ ValidationData ~~~ StrataProp
     end
 
 

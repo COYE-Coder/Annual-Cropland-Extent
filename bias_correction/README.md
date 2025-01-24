@@ -15,7 +15,7 @@ The methodology was applied independently to two subregions (Great Plains and So
 ## Installation
 
 ```bash
-pip install git+https://github.com/yourusername/bias_correction.git
+pip install git+https://github.com/COYE-Coder/Crop-Scope/main/bias_correction.git
 ```
 
 
@@ -37,7 +37,8 @@ results = bc.process_footprint(
 )
 
 # Create visualization
-bc.create_multipanel_plot(results, save_path='trends.png')```
+bc.create_multipanel_plot(results, save_path='trends.png')
+```
 
 
 See `demo.ipynb` for a complete example.

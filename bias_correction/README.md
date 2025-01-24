@@ -15,7 +15,7 @@ The methodology was applied independently to two subregions (Great Plains and So
 
 ## Workflow Diagram 
 
-'''mermaid 
+```mermaid 
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -85,7 +85,7 @@ flowchart TB
     classDef default fontSize:16px;
     classDef process fill:#f9f9f9,stroke:#666,stroke-width:2px,fontSize:18px;
     classDef box fill:#fff,stroke:#333,stroke-width:2px,fontSize:18px;
-    ```mermaid
+
 ## Installation
 
 ```bash

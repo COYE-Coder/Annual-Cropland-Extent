@@ -5,7 +5,7 @@ This package implements the Olofsson et al. (2014) methodology for bias-adjusted
 ## Methods
 
 The package implements a stratified sampling approach for bias correction of cropland area estimates. Following Olofsson et al. (2014), it:
-- Calculates error-adjusted area estimates for cropland and non-cropland
+- Calculates error-adjusted area estimates for cropland
 - Accounts for commission and omission errors
 - Weighs by proportional area of each stratum
 - Computes uncertainty estimates

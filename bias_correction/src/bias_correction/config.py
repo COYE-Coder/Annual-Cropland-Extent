@@ -26,8 +26,8 @@ def validate_paths():
     required_files = [
         INPUT_DATA_DIR / 'cropscope_gross.csv',
         INPUT_DATA_DIR / 'cropscope_net.csv',
-        INPUT_DATA_DIR / 'great_plains_accuracy_points_gdrive.csv',
-        INPUT_DATA_DIR / 'mexico_accuracy_points_gdrive.csv',
+        INPUT_DATA_DIR / 'great_plains_accuracy_points.csv',
+        INPUT_DATA_DIR / 'mexico_accuracy_points.csv',
         INPUT_DATA_DIR / 'corrected_cropland_area_estimates.json',
         FIG_DATA_DIR / 'canada_transparent.png',
         FIG_DATA_DIR / 'mexico_transparent.png',

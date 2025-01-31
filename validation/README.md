@@ -35,71 +35,71 @@ The validation directory contains the following files and subdirectories:
 ## Workflow Diagram
 
 ```mermaid
-%%{init: {
-  'theme': 'base',
-  'themeVariables': {
-    'primaryColor': '#b3e0ff',
-    'primaryTextColor': '#000',
-    'primaryBorderColor': '#7AA7C7',
-    'lineColor': '#7AA7C7',
-    'secondaryColor': '#ffe0b3',
-    'tertiaryColor': '#fff',
-    'fontSize': '20px'
-  }
-}}%%
-
-flowchart TB
-    subgraph InputData[" 📊 INPUT DATA "]
-        direction LR
-        style InputData fill:#e6f3ff,stroke:#7AA7C7,stroke-width:4px
-        
-        GeoJSON["GeoJSON Points<br/><i>Stratified samples<br/>by ecoregion</i>"]
-        LandsatIC["Landsat Images<br/><i>Surface reflectance<br/>collections</i>"]
-        RAPData["RAP Data<br/><i>Rangeland Analysis<br/>Platform</i>"]
-    end
-
-    subgraph Process[" ⚙️ IMAGE PROCESSING"]
-        direction TB
-        style Process fill:#fff5e6,stroke:#D4A76A,stroke-width:15px
-        
-        subgraph ChipPipeline["Chip Generation"]
-            direction TB
-            style ChipPipeline fill:#fffbf0,stroke:#D4A76A,stroke-width:2px
-            
-            Filter["Filter Images<br/>Apr-Sep Composite"] --> 
-            Download["Async Download<br/>Three Band Combos"] -->
-            Convert["Convert to<br/>GeoTIFF"]
-        end
-
-        subgraph Validation["Visual Interpretation"]
-            direction TB
-            style Validation fill:#fffbf0,stroke:#D4A76A,stroke-width:2px
-            
-            Display["Display Three<br/>Image Types"] -->
-            Interpret["Manual Point<br/>Interpretation"] -->
-            Record["Record Land<br/>Cover Class"]
-        end
-    end
-
-    subgraph Results[" 📈 RESULTS"]
-        direction TB
-        style Results fill:#e6ffe6,stroke:#79B779,stroke-width:4px
-        
-        CSV["Validation CSV<br/><i>Point-based results</i>"]
-        Analysis["Accuracy Analysis<br/><i>By strata & region</i>"]
-        
-        CSV --> Analysis
-    end
-
-    GeoJSON --> ChipPipeline
-    LandsatIC & RAPData --> Filter
-    Convert --> Display
-    Record --> CSV
-
-    classDef default fontSize:16px;
-    classDef process fill:#f9f9f9,stroke:#666,stroke-width:2px;
-    classDef box fill:#fff,stroke:#333,stroke-width:2px;
-    ```
+  %%{init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#b3e0ff',
+      'primaryTextColor': '#000',
+      'primaryBorderColor': '#7AA7C7',
+      'lineColor': '#7AA7C7',
+      'secondaryColor': '#ffe0b3',
+      'tertiaryColor': '#fff',
+      'fontSize': '20px'
+    }
+  }}%%
+  
+  flowchart TB
+      subgraph InputData[" 📊 INPUT DATA "]
+          direction LR
+          style InputData fill:#e6f3ff,stroke:#7AA7C7,stroke-width:4px
+          
+          GeoJSON["GeoJSON Points<br/><i>Stratified samples<br/>by ecoregion</i>"]
+          LandsatIC["Landsat Images<br/><i>Surface reflectance<br/>collections</i>"]
+          RAPData["RAP Data<br/><i>Rangeland Analysis<br/>Platform</i>"]
+      end
+  
+      subgraph Process[" ⚙️ IMAGE PROCESSING"]
+          direction TB
+          style Process fill:#fff5e6,stroke:#D4A76A,stroke-width:15px
+          
+          subgraph ChipPipeline["Chip Generation"]
+              direction TB
+              style ChipPipeline fill:#fffbf0,stroke:#D4A76A,stroke-width:2px
+              
+              Filter["Filter Images<br/>Apr-Sep Composite"] --> 
+              Download["Async Download<br/>Three Band Combos"] -->
+              Convert["Convert to<br/>GeoTIFF"]
+          end
+  
+          subgraph Validation["Visual Interpretation"]
+              direction TB
+              style Validation fill:#fffbf0,stroke:#D4A76A,stroke-width:2px
+              
+              Display["Display Three<br/>Image Types"] -->
+              Interpret["Manual Point<br/>Interpretation"] -->
+              Record["Record Land<br/>Cover Class"]
+          end
+      end
+  
+      subgraph Results[" 📈 RESULTS"]
+          direction TB
+          style Results fill:#e6ffe6,stroke:#79B779,stroke-width:4px
+          
+          CSV["Validation CSV<br/><i>Point-based results</i>"]
+          Analysis["Accuracy Analysis<br/><i>By strata & region</i>"]
+          
+          CSV --> Analysis
+      end
+  
+      GeoJSON --> ChipPipeline
+      LandsatIC & RAPData --> Filter
+      Convert --> Display
+      Record --> CSV
+  
+      classDef default fontSize:16px;
+      classDef process fill:#f9f9f9,stroke:#666,stroke-width:2px;
+      classDef box fill:#fff,stroke:#333,stroke-width:2px;
+  ```
 
 
 ## Usage

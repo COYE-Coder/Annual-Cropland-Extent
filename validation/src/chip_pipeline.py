@@ -65,10 +65,13 @@ async def fetch_and_convert_image(session: aiohttp.ClientSession, url: str, file
             f.write(png_data)
 
         # Now convert to GeoTIFF
-        tif_filename = filename.replace('.png', '.tif')
+        filename_parts = filename.split('_')
+        new_filename = '_'.join(filename_parts[:3] + filename_parts[4:])
+        tif_filename = new_filename.replace('.png', '.tif')
+        
         img = Image.open(filename)
         np_img = np.array(img)
-
+        
         # Get image dimensions
         nrows, ncols, nband = np_img.shape
 

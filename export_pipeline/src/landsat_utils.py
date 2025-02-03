@@ -1,3 +1,41 @@
+"""
+Utility functions for harmonizing Landsat 5, 7, and 8 imagery for long-term land use analysis.
+
+This module provides a standardized approach to combine data from three Landsat missions
+(5, 7, and 8) for consistent long-term land use change analysis across North America.
+The functions handle:
+
+1. Band name standardization and scaling
+   - Converts mission-specific band names to standard names (blue, green, red, etc.)
+   - Applies appropriate scaling factors for surface reflectance
+
+2. Quality masking for each mission
+   - Handles different QA bit structures between missions
+   - Masks clouds, cloud shadows, snow, and fill pixels
+   - Preserves clear observations only
+
+3. Spectral index calculation
+   - Computes NDVI, NBR2, and NDMI indices
+   - Applies consistent scaling across missions
+   - Maintains temporal properties
+
+4. Mission-specific processing
+   - Pre-2000: Uses Landsat 5 only
+   - 2000-2013: Combines Landsat 5 and 7
+   - Post-2013: Combines Landsat 7 and 8
+
+The main workflow is handled by get_landsat_for_year(), which automatically selects
+and processes imagery from the appropriate missions based on the year requested.
+
+Note: This implementation focuses on late summer/fall (August-November) imagery
+to capture natural senescence period conditions in North America in order to 
+differentiate croplands from natural systems. 
+
+Typical usage:
+    landsat_composite = get_landsat_for_year(2015)
+"""
+
+
 import ee
 
 # Band definitions

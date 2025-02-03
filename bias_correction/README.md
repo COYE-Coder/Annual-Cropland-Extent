@@ -1,6 +1,6 @@
 # Bias Correction for Cropland Area Estimation
 
-This package implements the Olofsson et al. (2014) methodology for bias-adjusted area estimation using stratified sampling. It was developed to process cropland extent analysis across the North American Central Flyway region, specifically handling both Great Plains and Southern (Mexican) subregions.
+This package implements the Olofsson et al. (2014) methodology for bias-adjusted area estimation using stratified sampling. It was developed to process cropland extent analysis across the North American Central Flyway region, specifically handling both Great Plains and Southern (Mexican) subregions. It uses accuracy data from the `/../validation/` folder to correct for systematic bias in the land-cover estimates on an annual basis. 
 
 ## Methods
 

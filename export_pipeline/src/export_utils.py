@@ -1,3 +1,31 @@
+"""
+Utility functions for exporting Landsat and RAP vegetation cover data.
+
+This module provides functions to:
+1. Process and merge RAP vegetation cover data from Mexico and CONUS
+2. Create spatially stratified export grids
+3. Export Earth Engine images to assets
+4. Process and export regional Landsat time series with RAP data
+
+The main workflow is handled by process_and_export_regional(), which coordinates
+the entire pipeline from data processing to export task creation.
+
+Functions:
+    get_rap_cover: Process and merge RAP vegetation cover data
+    create_export_grids: Create spatially stratified grid for exports
+    export_image_to_asset: Export an Earth Engine image to an asset
+    process_and_export_regional: Process and export regional time series data
+
+Typical usage:
+    process_and_export_regional(
+        geom_to_export=export_geometry,
+        mexico_cover_asset=mexico_asset_path,
+        conus_cover_asset=conus_asset_path,
+        output_asset_path=output_path,
+        start_year=2003,
+        end_year=2020
+    )
+"""
 import ee
 from typing import List, Union
 from .landsat_utils import get_landsat_for_year

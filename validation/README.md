@@ -4,7 +4,7 @@ This directory contains the code and resources for the agriculture validation pr
 
 ## Overview
 
-The validation pipeline is designed to evaluate the performance of our cropland extent model by comparing its predictions against manually labeled reference data. The pipeline consists of several Python scripts and a Jupyter notebook that facilitate the validation process. A sample of the chips is provided in the data folder, although the total amount of chips is too large to be uploaded to Github. 
+The validation pipeline is designed to evaluate the performance of our cropland extent model by comparing its predictions against manually labeled reference data. The pipeline consists of several Python scripts and a Jupyter notebook that facilitate the validation process. A sample of the chips is provided in the data folder, although the total amount of chips is too large to be uploaded to Github. Once we have visually interpreted the chips, we can use the resultant accuracy data to correct for systematic model bias. The code for the bias correction can be found in `/../bias_correction/`.
 
 ## Validation Methodology
 

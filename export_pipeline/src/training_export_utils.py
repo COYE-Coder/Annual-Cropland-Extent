@@ -22,13 +22,12 @@ Typical usage:
     )
 """
 
-
 import ee
 from typing import List, Dict, Optional
-from .export_utils import create_export_grids
+from .export_utils import create_export_grids, get_rap_cover
 from .landsat_utils import get_landsat_for_year
 
-__all__ = ['get_glad_labels', 'get_rap_cover', 'construct_feature_stack',
+__all__ = ['get_glad_labels', 'construct_feature_stack',
            'create_training_stack', 'export_training_samples', 
            'process_and_export_samples']
 
@@ -52,28 +51,6 @@ def get_glad_labels() -> ee.ImageCollection:
         ee.Date(ee.String(img.get('system:id')).slice(-4).cat('-01-01')).millis()
     ))
 
-def get_rap_cover(year: int, 
-                  mexico_cover: ee.ImageCollection,
-                  conus_cover: ee.ImageCollection) -> ee.Image:
-    """Get RAP cover data for a specific year."""
-    dateStart = f'{year}-09-01'
-    dateEnd = f'{year}-11-01'
-    
-    startYear = str(year) + '-01-01'
-    endYear = str(year + 1) + '-01-01'
-    
-    mx_cover = mexico_cover.filterDate(startYear, endYear)
-    cn_cover = conus_cover.filterDate(startYear, endYear)
-    
-    cover = mx_cover.merge(cn_cover)
-    
-    return cover.map(lambda img: img.select('AFG').add(img.select('PFG'))
-                    .addBands(img.select('TRE').add(img.select('SHR')))
-                    .addBands(img.select('BGR').add(img.select('LTR')))
-                    .divide(100)
-                    .rename('grass','woody','ground')
-                    .copyProperties(img, ['system:time_start'])
-                    .copyProperties(img, ['year'])).mosaic()
 
 def construct_feature_stack(img: ee.Image) -> ee.Image:
     """Construct feature stack with neighborhood arrays."""

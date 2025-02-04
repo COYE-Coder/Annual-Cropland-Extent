@@ -1,4 +1,4 @@
-# Export Pipeline
+# Imagery export pipeline for training and inference
 
 This module provides utilities for exporting Landsat time series data and training samples for the land cover classification exercise. It serves as the most upstream portion of the Annual Cropland Extent workflow. 
 

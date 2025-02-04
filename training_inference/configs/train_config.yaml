@@ -1,0 +1,31 @@
+data:
+  input_bands:
+    - ndvi
+    - nbr2
+    - ndmi
+    - grass
+    - woody
+    - ground
+  include_response: true # True if training, False if running inference
+  kernel_size: 512
+  train_size: 3588 # Number of train records contained in the train folder
+  eval_size: 720 # Number of eval records
+  compressed: false # If tfrecord.gz, need to use the compressed = true flag
+
+training:
+  backbone_freeze:
+    strategy: "none"  # none, full, progressive. Only allows freezing of "downsampling" layers
+  batch_size: 16
+  learning_rate: 0.0001
+  epochs: 100
+  loss_function: "focal_tversky"  # focal_tversky, dice_loss
+  existing_model:
+    use_pretrained: false  # Whether to use a pre-trained model
+    model_path: null       # Path to pre-trained model if use_pretrained is true
+
+
+paths:
+  data_folder: '/projects/land-use/carter/train_attnUNET/' 
+  train_base: 'train/'
+  eval_base: 'eval/'
+  model_output: ''  # Where to save model checkpoints

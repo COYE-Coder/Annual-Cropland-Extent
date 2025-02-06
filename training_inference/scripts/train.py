@@ -97,7 +97,7 @@ def freeze_backbone(model, strategy: str):
     if strategy == "none":
         return
     
-    else strategy == "full":
+    elif strategy == "full":
         for layer in model.layers:
             if 'down' in layer.name and ('encode_stride_conv' in layer.name or 'conv' in layer.name):
                 if not isinstance(layer, tf.keras.layers.BatchNormalization):

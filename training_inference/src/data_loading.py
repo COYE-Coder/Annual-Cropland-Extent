@@ -27,23 +27,18 @@ def parse_tfrecord(example_proto: tf.train.Example,
 def to_tuple(inputs: Dict[str, tf.Tensor],
             features: List[str],
             include_response: bool) -> Tuple[tf.Tensor, tf.Tensor]:
-    """Convert dictionary of tensors to (input, output) tuple.
-    
-    Args:
-        inputs: Dictionary of input tensors
-        features: List of feature names
-        include_response: Whether to include response variable
-        
-    Returns:
-        Tuple of (input_tensor, output_tensor)
-    """
+    """Convert dictionary of tensors to (input, output) tuple."""
+    # Stack input features
     inputsList = [inputs.get(key) for key in features]
     stacked = tf.stack(inputsList, axis=0)
     # Convert from CHW to HWC
     stacked = tf.transpose(stacked, [1, 2, 0])
     
     if include_response:
-        return stacked[:,:,:len(features)-1], stacked[:,:,len(features)-1:]
+        # Get response separately
+        response = inputs.get('response_ag')
+        response = tf.expand_dims(response, axis=-1)  # Add channel dimension
+        return stacked, response
     return stacked, None
 
 def get_dataset(pattern: str,

@@ -112,6 +112,7 @@ def get_regional_dataset(pattern: str,
     dataset = dataset_fn(pattern, features_dict, features)
     return dataset.batch(1)
 
+
 def partition_record_files(data_list: List[str]) -> List[List[str]]:
     """Partition files into groups by chunk number."""
     file_groups = {}

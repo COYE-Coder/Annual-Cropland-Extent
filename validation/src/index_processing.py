@@ -4,7 +4,7 @@ Users can iterate over a set of image chips to determine the landcover type in t
 
 The script includes the following main components:
 1. Image processing functions: Functions for processing and validating land use in a directory of TIFF files.
-2. Miscellaneus file management functions: Functions for creating and updating CSV files to store the processed data.
+2. Miscellaneous file management functions: Functions for creating and updating CSV files to store the processed data.
 3. Directory and file management functions: Functions for creating date-based directories and writing data to CSV files.
 
 Usage:
@@ -17,20 +17,23 @@ Note: Make sure to provide the necessary arguments when calling the functions, s
 geo_lookup dictionary, and CSV file paths.
 """
 
-import pandas as pd
 import os
+import glob
+import random
+from datetime import datetime
+
+import pandas as pd
 import rasterio
 import matplotlib.pyplot as plt
+import numpy as np
 from IPython.display import clear_output, display
 import geemap
 import ee
-import glob
-import numpy as np
-from .pass_image_collection import get_index_image, get_landsat_image
-from .config import geo_lookup
-from datetime import datetime
-import random
 from rasterio.windows import Window
+
+from .pass_image_collection import get_index_image, get_landsat_image
+from .config import geolookup_list
+
 
 
 # Image processing functions
@@ -93,7 +96,6 @@ def process_index(file_index: int, coords: list, geo_lookup: dict, directory: st
                 if img.ndim > 2:
                     img = np.dstack(img)
 
-                # Normalize values to 0-1 range for display
                 img = img / np.max(img)
 
                 # Display the image in the subplot
@@ -103,6 +105,9 @@ def process_index(file_index: int, coords: list, geo_lookup: dict, directory: st
                 red_dot_x = half_win_width
                 red_dot_y = half_win_height
                 axs[i].plot(red_dot_x, red_dot_y, 'ro')
+
+                # After all images are processed but before plt.show()
+                plt.tight_layout()
 
     # Show the figure with all subplots
     plt.show()
@@ -115,7 +120,6 @@ def process_index(file_index: int, coords: list, geo_lookup: dict, directory: st
             print("Displaying the map...")
             # Get the image
             index_image = get_index_image(year)
-
             landsat_image = get_landsat_image(year)
 
             # Create a map centered at the point
@@ -124,15 +128,13 @@ def process_index(file_index: int, coords: list, geo_lookup: dict, directory: st
             # Define the region to display
             region = ee.Geometry.Point(coords).buffer(1024 * 30).bounds()
 
-            # Add a high resolution basemap for extra information 
-            #  Because we want to know the landcover at a given year, take this with a grain of salt
+            # Add a high resolution basemap for extra information
+            # Because we want to know the landcover at a given year, take this with a grain of salt
             m.add_basemap('HYBRID')
 
             # Add the images to the map
             m.addLayer(landsat_image.clip(region), {'bands': ['red', 'green', 'blue'], 'min': 0, 'max': 1}, 'TRUE COLOR')
-
             m.addLayer(landsat_image.clip(region), {'bands': ['nir', 'red', 'green'], 'min': 0, 'max': 1}, 'RED / BROWN FALSE COLOR IMAGE')
-
             m.addLayer(index_image.clip(region), {'bands': ['grayscale', 'ag_filter', 'savi'], 'gamma': 0.37}, 'GREEN / BLUE INDEX IMAGE')
 
             # Add a marker at the point
@@ -147,7 +149,6 @@ def process_index(file_index: int, coords: list, geo_lookup: dict, directory: st
         elif user_input == 'note':
             # Prompt the user to enter their note
             note = input("Please enter your note: ")
-
             print(f"Note added for index {file_index}: {note}")
 
         if user_input == 'back':
@@ -203,6 +204,7 @@ def process_directory(directory: str, geo_lookup: dict, csv_file_path: str = Non
     Returns:
         The DataFrame containing the processed data.
     """
+
     # Set default CSV file path if not provided
     if csv_file_path is None:
         csv_file_path = os.path.join(directory, 'test_output.csv')
@@ -224,11 +226,11 @@ def process_directory(directory: str, geo_lookup: dict, csv_file_path: str = Non
     completed_indices = [f'{x}_{y}' for x, y in zip(master_df['index'], master_df['year'])]
 
     # Get list of TIFF files in the directory
-    files = [os.path.basename(x) for x in glob.glob(f'{directory}*.tif')]
+    files = [os.path.basename(x) for x in glob.glob(os.path.join(directory, '*.tif'))]
 
     # Extract unique identifiers
-    #  Because each unique ID corresponds to three different files, 
-    #  we have to examine only the files that are unique
+    # Because each unique ID corresponds to three different files,
+    # we have to examine only the files that are unique
     unique_files = {}
     for file in files:
         # Extracting the identifier as 'tile_ID_YEAR'
@@ -239,6 +241,8 @@ def process_directory(directory: str, geo_lookup: dict, csv_file_path: str = Non
     # Get a list of the unique files
     unique_file_list = list(unique_files.values())
 
+    for filename in unique_file_list:
+        print(f"Processing {filename}")
     # Shuffle the list
     random.shuffle(unique_file_list)
 
@@ -250,7 +254,7 @@ def process_directory(directory: str, geo_lookup: dict, csv_file_path: str = Non
         print(f'STARTING FILE INDEX {file_index}')
 
         year = filename.split('_')[2]
-        coords = geo_lookup[file_index]  
+        coords = geo_lookup[file_index]
 
         # Skip indices that have already been completed unless we're going back to them
         if file_index_year not in completed_indices or user_input == 'back':
@@ -261,7 +265,7 @@ def process_directory(directory: str, geo_lookup: dict, csv_file_path: str = Non
                                                         csv_file_path)
             completed_indices.append(file_index_year)
 
-            if process_result == False:
+            if process_result is False:
                 # If process_index returns False, the user wants to go back
                 go_back_index_year = completed_indices[-1]
                 try:
@@ -280,7 +284,7 @@ def process_directory(directory: str, geo_lookup: dict, csv_file_path: str = Non
                     user_input = 'done'
                 except ValueError:
                     print("Invalid index. Please enter a numerical index.")
-            elif process_result == None:
+            elif process_result is None:
                 print("Here is what you have accomplished this session:")
                 print(existing_df)
                 break

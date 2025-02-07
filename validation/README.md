@@ -4,7 +4,7 @@ This directory contains the code and resources for the agriculture validation pr
 
 ## Overview
 
-The validation pipeline is designed to evaluate the performance of our cropland extent model by comparing its predictions against manually labeled reference data. The pipeline consists of several Python scripts and a Jupyter notebook that facilitate the validation process. A sample of the chips is provided in the data folder, although the total amount of chips is too large to be uploaded to Github. 
+The validation pipeline is designed to evaluate the performance of our cropland extent model by comparing its predictions against manually labeled reference data. The pipeline consists of several Python scripts and a Jupyter notebook that facilitate the validation process. A sample of the chips is provided in the data folder, although the total amount of chips is too large to be uploaded to Github. Once we have visually interpreted the chips, we can use the resultant accuracy data to correct for systematic model bias. The code for the bias correction can be found in `/../bias_correction/`.
 
 ## Validation Methodology
 
@@ -26,13 +26,88 @@ The validation directory contains the following files and subdirectories:
 - `src/`: A directory containing the source code for the validation pipeline.
   - `index_processing.py`: A Python script that processes the sampled points and generates validation data.
   - `pass_image_collection.py`: A Python script that handles the retrieval and preprocessing of Landsat and RAP images.
+  - `chip_pipeline.py`: A Python script that handles the asynchronous downloading and geospatial conversion of image chips.
+  - `ee_auth.py`: A utility script for Google Earth Engine authentication and initialization.
   - `config.py`: A configuration file that stores the path to the GeoJSON file containing the sampled points.
 - `data/`: A directory containing the input data for the validation pipeline.
   - `ag_validation_stratifiedSamples_full_coverage_geo.geojson`: A GeoJSON file containing the sampled points for validation.
 
+## Workflow Diagram
+
+```mermaid
+  %%{init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#b3e0ff',
+      'primaryTextColor': '#000',
+      'primaryBorderColor': '#7AA7C7',
+      'lineColor': '#7AA7C7',
+      'secondaryColor': '#ffe0b3',
+      'tertiaryColor': '#fff',
+      'fontSize': '20px'
+    }
+  }}%%
+  
+  flowchart TB
+      subgraph InputData[" 📊 INPUT DATA "]
+          direction LR
+          style InputData fill:#e6f3ff,stroke:#7AA7C7,stroke-width:4px
+          
+          GeoJSON["GeoJSON Points<br/><i>Stratified samples<br/>by ecoregion</i>"]
+          LandsatIC["Landsat Images<br/><i>Surface reflectance<br/>collections</i>"]
+          RAPData["RAP Data<br/><i>Rangeland Analysis<br/>Platform</i>"]
+      end
+  
+      subgraph Process[" ⚙️ IMAGE PROCESSING"]
+          direction TB
+          style Process fill:#fff5e6,stroke:#D4A76A,stroke-width:15px
+          
+          subgraph ChipPipeline["Chip Generation"]
+              direction TB
+              style ChipPipeline fill:#fffbf0,stroke:#D4A76A,stroke-width:2px
+              
+              Filter["Filter Images<br/>Apr-Sep Composite"] --> 
+              Download["Async Download<br/>Three Band Combos"] -->
+              Convert["Convert to<br/>GeoTIFF"]
+          end
+  
+          subgraph Validation["Visual Interpretation"]
+              direction TB
+              style Validation fill:#fffbf0,stroke:#D4A76A,stroke-width:2px
+              
+              Display["Display Three<br/>Image Types"] -->
+              Interpret["Manual Point<br/>Interpretation"] -->
+              Record["Record Land<br/>Cover Class"]
+          end
+      end
+  
+      subgraph Results[" 📈 RESULTS"]
+          direction TB
+          style Results fill:#e6ffe6,stroke:#79B779,stroke-width:4px
+          
+          CSV["Validation CSV<br/><i>Point-based results</i>"]
+          Analysis["Accuracy Analysis<br/><i>By strata & region</i>"]
+          
+          CSV --> Analysis
+      end
+  
+      GeoJSON --> ChipPipeline
+      LandsatIC & RAPData --> Filter
+      Convert --> Display
+      Record --> CSV
+  
+      classDef default fontSize:16px;
+      classDef process fill:#f9f9f9,stroke:#666,stroke-width:2px;
+      classDef box fill:#fff,stroke:#333,stroke-width:2px;
+  ```
+
+
 ## Usage
 
 To use the validation pipeline:
+
+0. (Optional) - use `chip_pipeline.py` in order to pull a series of different validation points asynchronously. Sample useage:
+ ```python chip_pipeline.py --output_dir {YOUR_LOCAL_DIR} --num_chips_per_year 10 --start_year 2000 --end_year 2002```
 
 1. Open the `work_notebook.ipynb` Jupyter notebook and follow the instructions to run the validation process. The notebook will guide you through the steps of loading the sampled points, retrieving the corresponding Landsat and RAP images, and performing visual interpretation.
 

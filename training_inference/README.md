@@ -21,6 +21,7 @@ The model is trained on two types of labeled data:
 - Synthetic GLAD cropland extent samples (years 2003-2019)
     - (This synthetic GLAD data is the only data that is referenced in the rest of the github package)
 
+
 ### Usage
 To use, please install the dependencies:
 `pip install -r requirements.txt`

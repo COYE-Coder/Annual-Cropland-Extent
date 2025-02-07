@@ -12,6 +12,7 @@ data:
   eval_size: 720 # Number of eval records
   compressed: true # If tfrecord.gz, need to use the compressed = true flag
 
+
 training:
   backbone_freeze:
     strategy: "none"  # none, full, progressive. Only allows freezing of "downsampling" layers

@@ -25,9 +25,13 @@ Note: Because the Rangeland Analysis Platform is a proprietary data product, it 
 Questions can be directed to sean.carter@umt.edu
 """
 
+try:
+    from ee_auth import initialize_earth_engine  # For running as script
+except ImportError:
+    from .ee_auth import initialize_earth_engine  # For running as module
 import ee
 
-ee.Initialize()
+initialize_earth_engine()
 
 # Define the band names
 LC89_BANDS = ['SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7', 'QA_PIXEL']  # Landsat 8 and 9
@@ -166,15 +170,16 @@ def calculate_savi(img: ee.Image) -> ee.Image:
 
     return savi.addBands(img).copyProperties(img, ['system:time_start'])
 
+def initialize_collections():
+    """Initialize Landsat collections after Earth Engine authentication."""
+    global ls5sr, ls7sr, ls8sr
+    ls5sr = ee.ImageCollection('LANDSAT/LT05/C02/T1_L2').select(LC57_BANDS, STD_NAMES).map(apply_mask)
+    ls7sr = ee.ImageCollection("LANDSAT/LE07/C02/T1_L2").select(LC57_BANDS, STD_NAMES).map(apply_mask)
+    ls8sr = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2").select(LC89_BANDS, STD_NAMES).map(apply_mask_l8)
 
-# Rename the bands in each Landsat collection
-ls5sr = ee.ImageCollection('LANDSAT/LT05/C02/T1_L2').select(LC57_BANDS, STD_NAMES).map(apply_mask)
-ls7sr = ee.ImageCollection("LANDSAT/LE07/C02/T1_L2").select(LC57_BANDS, STD_NAMES).map(apply_mask)
-ls8sr = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2").select(LC89_BANDS, STD_NAMES).map(apply_mask_l8)
-
+initialize_collections()
 
 # Landsat image retrieval functions
-
 def get_landsat_ic_from_year(year: int)-> ee.ImageCollection:
     """
     Logic to receive the correct set of Landsat records. Any year after 2014 will have all three LANDSAT records.

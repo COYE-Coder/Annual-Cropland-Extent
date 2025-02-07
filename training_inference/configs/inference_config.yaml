@@ -19,3 +19,4 @@ paths:
   input_folder: 'sample_data/inference/'
   gcloud_output: 'gs://wlfw-tmp/attnUNET_pred/'
   existing_model: 'trained_model.h5'
+

@@ -1,0 +1,21 @@
+data:
+  input_bands:
+    - ndvi
+    - nbr2
+    - ndmi
+    - grass
+    - woody
+    - ground
+  include_response: false # Since inference, response band will not be present
+  kernel_size: 512
+  compressed: true
+
+inference:
+  batch_size: 16
+  memory_limit: 25000
+  exclude_chunks: [0, 1, 2, 4, 5, 6, 7, 11, 12] # If needed, exclude some of the chunks
+
+paths:
+  input_folder: 'sample_data/inference/'
+  gcloud_output: 'gs://wlfw-tmp/attnUNET_pred/'
+  existing_model: 'trained_model.h5'

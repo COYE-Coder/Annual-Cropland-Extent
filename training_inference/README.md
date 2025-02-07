@@ -19,7 +19,8 @@ The pipeline consists of two main components:
 The model is trained on two types of labeled data:
 - Manually annotated image chips (5000 chips, 19.2M hectares)
 - Synthetic GLAD cropland extent samples (years 2003-2019)
-    - (This synthetic GLAD data is the only data that can be pulled by the `export_pipeline` folder)
+    - (This synthetic GLAD data is the only data that is referenced in the rest of the github package)
+
 
 ### Usage
 To use, please install the dependencies:

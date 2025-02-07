@@ -10,7 +10,8 @@ data:
   kernel_size: 512
   train_size: 3588 # Number of train records contained in the train folder
   eval_size: 720 # Number of eval records
-  compressed: false # If tfrecord.gz, need to use the compressed = true flag
+  compressed: true # If tfrecord.gz, need to use the compressed = true flag
+
 
 training:
   backbone_freeze:
@@ -25,7 +26,7 @@ training:
 
 
 paths:
-  data_folder: '/projects/land-use/carter/train_attnUNET/' 
+  data_folder: 'sample_data/' 
   train_base: 'train/'
   eval_base: 'eval/'
   model_output: ''  # Where to save model checkpoints

@@ -8,7 +8,7 @@ data:
     - ground
   include_response: false # Since inference, response band will not be present
   kernel_size: 512
-  compressed: false
+  compressed: true
 
 inference:
   batch_size: 16
@@ -16,6 +16,7 @@ inference:
   exclude_chunks: [0, 1, 2, 4, 5, 6, 7, 11, 12] # If needed, exclude some of the chunks
 
 paths:
-  input_folder: '/projects/land-use/carter/train_attnUNET/eval/'
-  gcloud_output: 'gs://path/to/gcloud/output/attnUNET_pred/'
-  existing_model: '/path/to/model.h5'
+  input_folder: 'sample_data/inference/'
+  gcloud_output: 'gs://wlfw-tmp/attnUNET_pred/'
+  existing_model: 'trained_model.h5'
+

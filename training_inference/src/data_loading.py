@@ -103,18 +103,15 @@ def get_eval_dataset(pattern: str,
     dataset = dataset_fn(pattern, features_dict, features)
     return dataset.batch(1).repeat()
 
-def get_regional_dataset(image_list: List[str],
+def get_regional_dataset(pattern: str,
                         features_dict: Dict[str, Any],
-                        features: List[str]) -> tf.data.Dataset:
+                        features: List[str],
+                        compressed: bool = False) -> tf.data.Dataset:
     """Get dataset for regional inference."""
-    dataset = tf.data.TFRecordDataset(image_list)
-    
-    parse_fn = lambda x: parse_tfrecord(x, features_dict)
-    to_tuple_fn = lambda x: to_tuple(x, features, include_response=False)
-    
-    dataset = dataset.map(parse_fn, num_parallel_calls=5)
-    dataset = dataset.map(to_tuple_fn, num_parallel_calls=5).batch(1)
-    return dataset
+    dataset_fn = get_dataset_gz if compressed else get_dataset
+    dataset = dataset_fn(pattern, features_dict, features)
+    return dataset.batch(1)
+
 
 def partition_record_files(data_list: List[str]) -> List[List[str]]:
     """Partition files into groups by chunk number."""

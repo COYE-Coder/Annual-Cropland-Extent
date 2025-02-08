@@ -37,7 +37,7 @@ Our map highlights the long-term trajectory of the central North American cropla
 
 ## Visualization
 
-For a visualization of the dataset, please refer to this [Google Earth Engine Link](https://historical-imagery.projects.earthengine.app/view/mxag)
+For a visualization of the dataset, please refer to this [Google Earth Engine Link](https://wlfw-um.projects.earthengine.app/view/cropland-extent-map)
 
 ## Citations
 

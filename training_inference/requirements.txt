@@ -1,6 +1,7 @@
 tensorflow>=2.13.0; platform_system != "Darwin"  # for Windows/Linux
 tensorflow-macos>=2.13.0; platform_system == "Darwin"  # for Mac
 tensorflow-metal; platform_system == "Darwin"  # Mac GPU support
+## None of the above were tested on anything except for Mac.
 tensorflow-addons==0.20.0
 keras>=2.13.1
 keras-unet-collection==0.1.13

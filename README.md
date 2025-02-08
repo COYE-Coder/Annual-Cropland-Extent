@@ -21,6 +21,13 @@ Our study area encompasses the entire central North American flyway, which is cr
 
 Our map highlights the long-term trajectory of the central North American cropland footprint across political boundaries, with important applications for rural livelihoods, carbon emissions, conservation policy, and biodiversity protection.
 
+## Organization
+- This is not intended to be a working repository. Rather, the submodules contained are intended to demonstrate the analysis pipeline, and are each disparate from one another.
+- Generally, we see this structure (with corresponding `submodule name`):
+  -  EXPORT_DATA `export_pipeline` --> TRAIN MODEL AND RUN INFERENCE `training_inference` --> VALIDATE MODEL `validation` --> CORRECT FOR SYSTEMATIC BIAS `bias_correction`
+ 
+- For more details on the scientific product, please refer to THIS PREPRINT (not yet available)
+
 ## Model Pretraining and Fine-Tuning
 
 - Pretrained on the Global Cropland Expansion product (Potapov et al. 2021)

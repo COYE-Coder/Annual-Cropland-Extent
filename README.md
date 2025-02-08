@@ -1,4 +1,4 @@
-# CropScope
+# Annual Cropland Extent
 
 ## A high-resolution (30-m), annual cropland extent product for North America's Grasslands (1996-2021)
 

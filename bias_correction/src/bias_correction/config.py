@@ -101,8 +101,8 @@ COUNTRY_COLUMNS: List[str] = [
 DATA_FILES: Dict[str, str] = {
     'gross_cropland': str(INPUT_DATA_DIR / 'cropscope_gross.csv'),
     'net_cropland': str(INPUT_DATA_DIR / 'cropscope_net.csv'),
-    'gp_accuracy': str(INPUT_DATA_DIR / 'great_plains_accuracy_points_gdrive.csv'),
-    'mx_accuracy': str(INPUT_DATA_DIR / 'mexico_accuracy_points_gdrive.csv')
+    'gp_accuracy': str(INPUT_DATA_DIR / 'great_plains_accuracy_points.csv'),
+    'mx_accuracy': str(INPUT_DATA_DIR / 'mexico_accuracy_points.csv')
 }
 
 def validate_input_data(df: pd.DataFrame, required_cols: List[str] = REQUIRED_COLUMNS) -> bool:

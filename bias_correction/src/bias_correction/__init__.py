@@ -17,14 +17,14 @@ import numpy as np
 from typing import Dict,List
 
 
-from bias_correction.adjustment import (
+from .adjustment import (
     cropland_area_adjustment,
     process_footprint,
     process_subregion,
     process_years
 )
 
-from bias_correction.config import (
+from .config import (
     DATA_DIR,
     INPUT_DATA_DIR,
     FIG_DATA_DIR,
@@ -38,7 +38,7 @@ from bias_correction.config import (
 )
 
 
-from bias_correction.visualization import (
+from .visualization import (
     create_multipanel_plot
 )
 

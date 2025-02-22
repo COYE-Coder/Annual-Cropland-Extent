@@ -12,7 +12,7 @@ import pandas as pd
 from scipy import stats
 import matplotlib.pyplot as plt
 from typing import Dict, Union
-from bias_correction.config import FIG_DATA_DIR
+from .config import FIG_DATA_DIR
 
 
 # Constants

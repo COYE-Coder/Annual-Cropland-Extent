@@ -21,7 +21,8 @@ Our study area encompasses the entire central North American flyway, which is cr
 Our map highlights the long-term trajectory of the central North American cropland footprint across political boundaries, with important applications for rural livelihoods, conservation policy, and biodiversity protection.
 
 ## Organization
-- This is not intended to be a working repository. Rather, the submodules contained are intended to demonstrate the analysis pipeline, and are each disparate from one another.
+- Due to patchy data availability and permissions, this is not intended to be a working repository. Rather, the submodules contained are intended to demonstrate the analysis pipeline. Each submodule is a disparate entity indicating the four major portions of the analysis pipeline. These correspond roughly to the major sections of the Methods in the below preprint.
+- 
 - Generally, the pipeline follows the below sequence (with corresponding `submodule name`):
   -  EXPORT_DATA `export_pipeline` --> TRAIN MODEL AND RUN INFERENCE `training_inference` --> VALIDATE MODEL `validation` --> CORRECT FOR SYSTEMATIC BIAS `bias_correction`
  

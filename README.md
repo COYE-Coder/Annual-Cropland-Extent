@@ -14,12 +14,11 @@ Our study area encompasses the entire central North American flyway, which is cr
 
 ### Key Findings
 
-- We estimate that the combined cropland footprint of the United States' and Canadian subregions expanded by between 7.8 and 11.8 million hectares over the 26-year period.
-- In the Mexican portion of our study area, we estimate cropland expansion to be between 2.4 and 2.7 million hectares.
+- We estimate that the combined cropland footprint expanded by about 20 million hectares over 20 years.
+- In the Mexican portion of our study area, we estimate cropland expansion to be about 1.6 million hectares.
 - In the Great Plains, our data, consistent with other studies, indicate that although actively cropped area has declined, the overall cumulative footprint of cropland continues to expand.
-- In contrast, both the active and cumulative footprints of cultivation are increasing in Mexico.
 
-Our map highlights the long-term trajectory of the central North American cropland footprint across political boundaries, with important applications for rural livelihoods, carbon emissions, conservation policy, and biodiversity protection.
+Our map highlights the long-term trajectory of the central North American cropland footprint across political boundaries, with important applications for rural livelihoods, conservation policy, and biodiversity protection.
 
 ## Organization
 - This is not intended to be a working repository. Rather, the submodules contained are intended to demonstrate the analysis pipeline, and are each disparate from one another.
@@ -36,11 +35,6 @@ Our map highlights the long-term trajectory of the central North American cropla
   - USDA Cropland Data Layer (USDA-NASS, 2021)
   - Global Land Analysis and Discovery Cropland data product (Potapov et al. 2021)
 
-## Initial Key Findings
-
-- Estimated conversion rate of approximately 4 million acres per year across the entire study area
-- Estimated conversion rate of roughly 2.5 million acres per year in the Great Plains region
-- While net cropland area remains relatively stable, the gross footprint of agricultural lands continues to expand
 
 ## Visualization
 

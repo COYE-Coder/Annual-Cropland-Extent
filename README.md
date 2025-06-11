@@ -26,7 +26,7 @@ Our map highlights the long-term trajectory of the central North American cropla
 - Generally, the pipeline follows the below sequence (with corresponding `submodule name`):
   -  EXPORT_DATA `export_pipeline` --> TRAIN MODEL AND RUN INFERENCE `training_inference` --> VALIDATE MODEL `validation` --> CORRECT FOR SYSTEMATIC BIAS `bias_correction`
  
-- For more details on the scientific product, please refer to THIS PREPRINT (not yet available)
+- For more details on the scientific product, please refer to [this preprint article](https://www.biorxiv.org/content/10.1101/2025.03.18.643874v1) (to be published summer 2025). 
 
 ## Model Pretraining and Fine-Tuning
 
